@@ -1,0 +1,4 @@
+mum\myadventure\controller\LocationController.class
+mum\myadventure\domain\Location.class
+mum\myadventure\dao\LocationDao.class
+mum\myadventure\service\LocationService.class
