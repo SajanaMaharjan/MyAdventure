@@ -23,6 +23,11 @@
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
     
+    
+    <!-- DispatcherServlet Context: defines this servlet's request-processing
+    infrastructure -->
+
+    <!-- Enables the Spring MVC @Controller programming model -->
     <!--@repo, @controll @-->
     <mvc:annotation-driven />
     <!--bean banaune kaam-->
@@ -30,18 +35,29 @@
     <context:annotation-config /> 
     <!--autowire bean vitra ko-->
       
-    
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager" />
     <!--
     Most controllers will use the ControllerClassNameHandlerMapping above, but
     for the index controller we are using ParameterizableViewController, so we must
     define an explicit mapping for it.
     -->
 
-
+    <!-- Resolves views selected for rendering by @Controllers to .jsp resources
+    in the /WEB-INF/views directory -->
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/JSP/"
           p:suffix=".jsp" />
     
     <!--<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>-->
+    
+    
+        <!-- Handles HTTP GET requests for /web-resources/** by efficiently serving
+              up static resources in the ${webappRoot}/resources/ directory -->
+       <mvc:resources mapping="/resources/**" location="/resources/" />
+       
 </beans>

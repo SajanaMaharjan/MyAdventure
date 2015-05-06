@@ -9,6 +9,7 @@ import java.util.List;
 import mum.myadventure.domain.Location;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation = Propagation.MANDATORY)
 public class LocationDao {
     
+    @Autowired
     private SessionFactory sf;
 
     public LocationDao() {
@@ -37,6 +39,10 @@ public class LocationDao {
 
     public void setSf(SessionFactory sf) {
         this.sf = sf;
+    }
+
+    public void addLocation(Location location) {
+         sf.getCurrentSession().persist(location);
     }
     
 }

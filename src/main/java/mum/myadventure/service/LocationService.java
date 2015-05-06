@@ -13,21 +13,25 @@ import org.springframework.transaction.annotation.Transactional;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author sajana
  */
 @Service
-@Transactional (propagation = Propagation.REQUIRES_NEW)
+@Transactional(propagation = Propagation.REQUIRES_NEW)
 public class LocationService {
-    
-     @Autowired
+
+    @Autowired
     private LocationDao locationDao;
-    
-      public List<Location> getAll(){
+
+    public List<Location> getAll() {
         return locationDao.getAll();
     }
-    
-    
+
+    public void addLocation(Location location) {
+
+        locationDao.addLocation(location);
+
+    }
+
 }
