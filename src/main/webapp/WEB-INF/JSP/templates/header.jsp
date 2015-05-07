@@ -38,13 +38,12 @@
     <body>
 
         <div class="pure-menu pure-menu-horizontal">
-            <c:url var="location" value="/location/" />
-            <a href="${location}" class="pure-menu-heading">MyAdventure</a>
             <ul class="pure-menu-list">
-                
-                <c:url var="location" value="/location/listAll" />
-                <li class="pure-menu-item"><a href="${location}" class="pure-menu-link">Destinations</a></li>
-                 <c:url var="adventure" value="/adventure/listAll" />
+                <c:url var="destination" value="/destination/" />
+                <li class="pure-menu-item"><a href="${destination}" class="pure-menu-heading">MyAdventure</a></li>
+                    <c:url var="destination" value="/destination/listAll" />
+                <li class="pure-menu-item"><a href="${destination}" class="pure-menu-link">Destinations</a></li>
+                    <c:url var="adventure" value="/adventure/listAll" />
                 <li class="pure-menu-item pure-menu-selected"><a href="${adventure}" class="pure-menu-link">Adventures</a></li>
                 <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a></li>
             </ul>

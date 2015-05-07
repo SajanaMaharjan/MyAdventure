@@ -34,6 +34,7 @@ public class AdventureDao {
 
     public List<Adventure> getAll() {
         Query query = sf.getCurrentSession().createQuery("from Adventure");
+        System.out.print(query + "asdf");
         return query.list();
     }
     

@@ -33,7 +33,7 @@ public class AdventureController {
         return "adventure";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/add/{id}", method = RequestMethod.GET)
     public String addAdventure(@ModelAttribute Adventure adventure) {
         return "admin/addAdventure";
     }
