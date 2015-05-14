@@ -8,6 +8,7 @@ package mum.myadventure.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,10 +26,14 @@ public class Destination implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @Column
     private String destinationName;
+    
+    @Column
     private String destinationDescription;
 
-    @OneToMany
+    @OneToMany(mappedBy = "destination")
     private List<Adventure> adventures = new ArrayList<>();
 
     public Destination() {
@@ -37,6 +42,12 @@ public class Destination implements Serializable {
     public Destination(String destinationName, String destinationDescription) {
         this.destinationName = destinationName;
         this.destinationDescription = destinationDescription;
+    }
+
+    public void addAdventure(Adventure adventure) {
+        this.adventures.add(adventure);
+        adventure.setDestination(this);
+        
     }
 
     public Long getId() {

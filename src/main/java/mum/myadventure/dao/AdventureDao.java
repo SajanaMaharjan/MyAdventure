@@ -24,7 +24,7 @@ public class AdventureDao {
 
     @Autowired
     private SessionFactory sf;
-
+    
     public AdventureDao() {
     }
 

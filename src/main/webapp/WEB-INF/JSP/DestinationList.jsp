@@ -26,17 +26,19 @@
                             <td>${destination.destinationName}</td>
                             <td>${destination.destinationDescription}</td>
                             <td><a href="view/${destination.id}">view</a></td>
+                            </br>
                             <td>
+                                <a href="../destination/adventure/add/${destination.id}">Add Adventure</a>
                                 <a href="../adventure/add/${destination.id}">Add Adventure</a>
-                               
+
                             </td>
-                            
+
                         </tr>
                     </c:forEach>
                 </table>
             </div>
         </section>
-        
-         <%@include file="templates/footer.jsp"%>
+
+        <%@include file="templates/footer.jsp"%>
     </body>
 </html>

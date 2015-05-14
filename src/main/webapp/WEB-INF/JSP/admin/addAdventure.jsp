@@ -15,8 +15,8 @@
     <body>
         <%@include file="../templates/header.jsp"%>
         <section>
-            <c:url var="actionUrl" value="save" />
-            <form:form id="adventureForm" commandName="adventure" method="post"
+            <c:url var="actionUrl" value="../../destination/saveAdventure" />
+            <form:form id="adventureForm" commandName="destinationAdventureDTO" method="post"
                        action="${actionUrl }" class="pure-form pure-form-aligned">
 
                 <fieldset>

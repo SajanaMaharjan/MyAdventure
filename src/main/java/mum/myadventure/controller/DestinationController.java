@@ -8,6 +8,8 @@ package mum.myadventure.controller;
 import javax.validation.Valid;
 import mum.myadventure.domain.Adventure;
 import mum.myadventure.domain.Destination;
+import mum.myadventure.dto.DestinationAdventureDTO;
+import mum.myadventure.service.AdventureService;
 import mum.myadventure.service.DestinationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,24 +19,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
  * @author sajana
  */
 @Controller
-@RequestMapping("destination")
+@RequestMapping("/destination")
 public class DestinationController {
 
     @Autowired
     private DestinationService destinationService;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public String destination(@ModelAttribute Destination destination) {
-        return "index";
-    }
-    
+    @Autowired
+    private AdventureService adventureService;
+
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
     public String listAllDestinations(Model model) {
         model.addAttribute("destinations", destinationService.getAll());
@@ -42,21 +41,23 @@ public class DestinationController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String addDestination(@ModelAttribute Destination destination) {
+    public String addDestination(@ModelAttribute DestinationAdventureDTO dto) {
         return "admin/addDestination";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String addDestination(@Valid Destination destination, BindingResult result) {
+    public String addDestination(@Valid DestinationAdventureDTO dto, BindingResult result) {
         if (!result.hasErrors()) {
-            destinationService.addDestination(destination);
+            destinationService.addDestination(dto.getDestination());
             return "redirect:/destination/listAll";
         }
-        return "AddDestination";
+        return "admin/addDestination";
     }
-    
-     @RequestMapping (value="/view/{id}", method=RequestMethod.GET)
-    public String viewDestination(@PathVariable long id, Model model){
+
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    public String viewDestination(@PathVariable long id, Model model) {
+
+        System.out.println("destuin__+: " + id);
         Destination destination = destinationService.getDestinationById(id);
         model.addAttribute("selectedDestination", destination);
 //        System.out.println("course name is: " + destination.getDestinationName());
@@ -64,23 +65,32 @@ public class DestinationController {
 //        model.addAttribute("review", new Review());
         return "Destination";
     }
-    
-//     @RequestMapping (value="/adventure/add/{id}", method=RequestMethod.POST)
-//    public String addAdventure(@Valid Adventure adventure, BindingResult result, @PathVariable long id){
+
+    @RequestMapping(value = "/addAdventure/{id}", method = RequestMethod.GET)
+    public String addAdventure(@PathVariable long id) {
+        System.out.println("add avent--" + id);
 //        if (!result.hasErrors()){
-//          
+//            
 //            adventure.setId(0);
 //            Destination destination = destinationService.getDestinationById(id);
-//            System.out.println("debug 1");
-//            destinationService.addAdventure(adventure);
-//            System.out.println("debug 2");
 //            destination.addAdventure(adventure);
-//            System.out.println("debug 3");
+//            adventureService.addAdventure(adventure);
 //            destinationService.update(destination);
-//            System.out.println("debug 4");
-//            return ("redirect:/destination/view/" + String.valueOf(id));
+        return ("redirect:/add");
 //        }
 //        return "adventure/listAll/{id}";
-//    }
+    }
 
+    @RequestMapping(value = "/saveAdventure", method = RequestMethod.POST)
+    public String saveAdventure(@Valid DestinationAdventureDTO dto, BindingResult result) {
+//        System.out.println("add avent--" + id);
+        if (!result.hasErrors()) {
+//            Destination destination = destinationService.getDestinationById(id);
+            Destination destination = dto.getDestination();
+            destination.addAdventure(dto.getAdventure());
+            adventureService.addAdventure(dto.getAdventure());
+            return ("redirect:/destination/view/" + String.valueOf(destination.getId()));
+        }
+        return "adventure/listAll/{id}";
+    }
 }

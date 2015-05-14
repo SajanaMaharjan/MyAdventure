@@ -5,10 +5,14 @@
  */
 package mum.myadventure.domain;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 /**
  *
  * @author sajana
@@ -19,8 +23,15 @@ public class Adventure {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    
     private String adventureName;
     private String adventureDescription;
+    
+//    cascade save destination object when you save adventure object
+    @ManyToOne(cascade = CascadeType.PERSIST)
+//    @JoinColumn(name="destinationId")
+    private Destination destination;
+
 
     public Adventure() {
     }
@@ -54,4 +65,13 @@ public class Adventure {
         this.adventureDescription = adventureDescription;
     }
 
+    public Destination getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Destination destination) {
+        this.destination = destination;
+    }
+
+    
 }

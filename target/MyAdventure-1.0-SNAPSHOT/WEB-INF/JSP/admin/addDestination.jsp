@@ -16,7 +16,7 @@
     </head>
     <body>
         <c:url var="actionUrl" value="save" />
-        <form:form id="destinationForm" commandName="destination" method="post"
+        <form:form id="destinationForm" commandName="destinationAdventureDTO" method="post"
                    action="${actionUrl }" class="pure-form pure-form-aligned">
 
             <fieldset>
@@ -30,7 +30,6 @@
                     <label for="description">Description</label>
                     <form:input path="destinationDescription" placeholder="Descrition" />
                 </div>
-
                 <input type="submit"/>
             </fieldset>
         </form:form>

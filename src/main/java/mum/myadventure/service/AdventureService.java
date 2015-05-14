@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author sajana
  */
 @Service
-@Transactional(propagation = Propagation.REQUIRES_NEW)
+@Transactional
 public class AdventureService {
     
     @Autowired

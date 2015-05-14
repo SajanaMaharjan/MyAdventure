@@ -7,6 +7,7 @@ package mum.myadventure.controller;
 
 import javax.validation.Valid;
 import mum.myadventure.domain.Adventure;
+import mum.myadventure.dto.DestinationAdventureDTO;
 import mum.myadventure.service.AdventureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,14 +35,15 @@ public class AdventureController {
     }
 
     @RequestMapping(value = "/add/{id}", method = RequestMethod.GET)
-    public String addAdventure(@ModelAttribute Adventure adventure) {
+    public String addAdventure(@ModelAttribute DestinationAdventureDTO dto) {
         return "admin/addAdventure";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String addAdventure(@Valid Adventure adventure, BindingResult result) {
+    public String addAdventure(@Valid DestinationAdventureDTO dto, BindingResult result) {
         if (!result.hasErrors()) {
-            adventureService.addAdventure(adventure);
+            adventureService.addAdventure(dto.getAdventure());
+//            return "redirect:/adventure/listAll";
             return "redirect:/adventure/listAll";
         }
         return "adventure";

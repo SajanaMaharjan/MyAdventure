@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author sajana
  */
 @Service
-@Transactional(propagation = Propagation.REQUIRES_NEW)
+@Transactional
 public class DestinationService {
 
     @Autowired
@@ -34,8 +34,10 @@ public class DestinationService {
 
     }
 
+//    @Override
+    @Transactional(readOnly = true)
     public Destination getDestinationById(long id) {
-         return destinationDao.getDestinationById(id);
+        return destinationDao.getDestinationById(id);
     }
 
 }
