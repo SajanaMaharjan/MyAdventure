@@ -5,6 +5,7 @@
  */
 package mum.myadventure.service;
 
+import java.util.List;
 import mum.myadventure.dao.AdventureCategoryDao;
 import mum.myadventure.domain.AdventureCategory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,10 @@ public class AdventureCategoryService {
     
     public void addAdventureCategory(AdventureCategory adventureCategory) {
         adCatDao.addAdventureCategory(adventureCategory);
+    }
+    
+    public List<AdventureCategory> getAll(){
+        return adCatDao.getAll();
     }
     
 }

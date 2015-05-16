@@ -6,13 +6,18 @@
 package mum.myadventure.controller;
 
 import javax.validation.Valid;
+import mum.myadventure.domain.Destination;
+//import mum.myadventure.domain.Destination;
 import mum.myadventure.domain.Region;
+import mum.myadventure.dto.DestinationAdventureDTO;
+import mum.myadventure.service.DestinationService;
 import mum.myadventure.service.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,6 +31,9 @@ public class RegionController {
 
     @Autowired
     private RegionService regionService;
+    
+    @Autowired
+    private DestinationService destinationService;
 
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
     public String listAllRegions(Model model, @ModelAttribute Region region) {
@@ -58,9 +66,41 @@ public class RegionController {
         return "redirect:/region/listAll";
     }
     
-//    @RequestMapping(value = "/addDestination", method=RequestMethod.GET)
-//    public String addDestination(@param){
-//        
-//    }
+    @RequestMapping(value = "/addDestination/{id}", method=RequestMethod.GET)
+    public String addDestination(@PathVariable long id, Model model,@ModelAttribute DestinationAdventureDTO dto) {
+
+        Region region = regionService.getRegionById(id);
+        model.addAttribute("selectedRegion", region);
+        
+//        System.out.println("course name is: " + destination.getDestinationName());
+//        model.addAttribute("reviews", course.getReviews());
+//        model.addAttribute("review", new Review());
+        return "admin/addDestination";
+        
+    }
+    
+    @RequestMapping(value = "/addDestination/save/{id}", method=RequestMethod.POST)
+    public String saveDestination(@PathVariable long id, Model model,@Valid Destination destination, BindingResult result) {
+
+        
+//        model.addAttribute("selectedRegion", region);
+        
+//        System.out.println("course name is: " + destination.getDestinationName());
+//        model.addAttribute("reviews", course.getReviews());
+//        model.addAttribute("review", new Review());
+//        return "admin/addDestination";
+        
+        if (!result.hasErrors()) {
+//            Destination destination = destinationService.getDestinationById(id);
+            Region region = regionService.getRegionById(id);
+           
+            destinationService.addDestination(destination);
+             region.addDestination(destination);
+             regionService.update(region);
+//            return ("redirect:/destination/view/" + String.valueOf(destination.getId()));
+        }
+//        return "adventure/listAll/{id}";
+         return "admin/addRegion";
+    }
 
 }

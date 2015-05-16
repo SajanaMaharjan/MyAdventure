@@ -16,7 +16,6 @@
     <body>
 
         <%@include file="templates/header.jsp"%>
-
         Destinations
         <section>
             <div class="dataList">
@@ -31,9 +30,7 @@
                     </tr>
                 </table>
             </div>
-
         </section>
-
         <%@include file="templates/footer.jsp"%>
     </body>
 </html>

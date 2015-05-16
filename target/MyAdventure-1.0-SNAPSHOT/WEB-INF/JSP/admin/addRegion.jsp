@@ -47,7 +47,7 @@
                     <label for="description">Description</label>
                     <form:input path="regionDescription" placeholder="Descrition" />
                 </div>
-                <input type="submit"/>
+                <input type="submit" value="Add Region"/>
             </fieldset>
         </form:form>
         <%@include file="../templates/footer.jsp"%>

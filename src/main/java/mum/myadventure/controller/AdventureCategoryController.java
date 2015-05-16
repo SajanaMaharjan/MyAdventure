@@ -7,7 +7,6 @@ package mum.myadventure.controller;
 
 import javax.validation.Valid;
 import mum.myadventure.domain.AdventureCategory;
-import mum.myadventure.domain.Region;
 import mum.myadventure.service.AdventureCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,10 +26,12 @@ public class AdventureCategoryController {
 
     @Autowired
     private AdventureCategoryService adventureCategoryService;
+    private Object model;
 
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)    
-    public String listAllAdventCat(@ModelAttribute AdventureCategory adventureCategory) {
+    public String listAllAdventCat(@ModelAttribute AdventureCategory adventureCategory, Model model) {
 //        model.addAttribute("regions", adCatSer.getAll());
+         model.addAttribute("adventureCategories", adventureCategoryService.getAll());
         return "admin/addAdventureCategory";
     }
 

@@ -14,6 +14,23 @@
     </head>
     <body>
         <%@include file="../templates/header.jsp"%>
+        
+          Adventure Categories
+        <section>
+            <div class="dataList">
+                <table>
+                    <c:forEach var="adventureCategories" items="${adventureCategories}">
+                        <tr>
+                            <td>${adventureCategories.adventureCatName}</td>
+                            <td>${adventureCategories.adventureCatDescription}</td>
+                            <!--<td><a href="view/${adventureCategories.id}">view</a></td>-->
+                            </br>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+        </section>
+        
         <section>
             <c:url var="actionUrl" value="save" />
             <form:form id="adventCatForm" commandName="adventureCategory" method="post"

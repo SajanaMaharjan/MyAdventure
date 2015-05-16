@@ -15,7 +15,21 @@
         <%@include file="../templates/header.jsp"%>
     </head>
     <body>
-        <c:url var="actionUrl" value="save" />
+
+        <section>
+            <div class="dataList">
+                <table>
+                    <tr>
+                        <td>${selectedRegion.regionName}</td>
+                    </tr>
+                    <tr>
+                        <td>${selectedRegion.regionDescription}</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <c:url var="actionUrl" value="save/${selectedRegion.id}" />
         <form:form id="destinationForm" commandName="destinationAdventureDTO" method="post"
                    action="${actionUrl }" class="pure-form pure-form-aligned">
 

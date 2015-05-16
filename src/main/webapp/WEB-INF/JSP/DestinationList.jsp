@@ -16,7 +16,7 @@
     <body>
 
         <%@include file="templates/header.jsp"%>
-
+ 
         Destinations
         <section>
             <div class="dataList">

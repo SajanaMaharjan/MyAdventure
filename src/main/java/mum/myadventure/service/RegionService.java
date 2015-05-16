@@ -29,5 +29,13 @@ public class RegionService {
     public List<Region> getAll() {
             return regionDao.getAll();
     }
+
+    public Region getRegionById(long id) {
+        return regionDao.getRegionById(id);
+    }
+    
+      public Region update(Region region){
+        return regionDao.update(region);
+    }
     
 }

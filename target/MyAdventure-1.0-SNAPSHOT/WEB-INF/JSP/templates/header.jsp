@@ -46,6 +46,11 @@
                     <c:url var="adventure" value="/adventure/listAll" />
                 <li class="pure-menu-item pure-menu-selected"><a href="${adventure}" class="pure-menu-link">Adventures</a></li>
                 <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a></li>
+              <c:url var="region" value="/region/listAll" />
+                <li class="pure-menu-item pure-menu-selected"><a href="${region}" class="pure-menu-link">Region</a></li>
+               <c:url var="adventureCategory" value="/adventureCategory/listAll" />
+                <li class="pure-menu-item pure-menu-selected"><a href="${adventureCategory}" class="pure-menu-link">Adventure Category</a></li>
+             
             </ul>
         </div>
 

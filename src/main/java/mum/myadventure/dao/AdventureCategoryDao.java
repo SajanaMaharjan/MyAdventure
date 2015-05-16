@@ -5,7 +5,9 @@
  */
 package mum.myadventure.dao;
 
+import java.util.List;
 import mum.myadventure.domain.AdventureCategory;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -36,6 +38,11 @@ public class AdventureCategoryDao {
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
+    }
+
+    public List<AdventureCategory> getAll() {
+         Query query = sessionFactory.getCurrentSession().createQuery("from AdventureCategory");
+        return query.list();
     }
 
 }

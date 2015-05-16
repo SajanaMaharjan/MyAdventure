@@ -45,6 +45,15 @@ public class RegionDao {
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+
+    public Region getRegionById(long id) {
+        return(Region)sessionFactory.getCurrentSession().load(Region.class, id);
+    }
+
+    public Region update(Region region) {
+          Region retVal = (Region)sessionFactory.getCurrentSession().merge(region);
+        return retVal;
+    }
     
     
 }
