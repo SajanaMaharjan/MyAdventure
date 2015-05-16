@@ -29,10 +29,29 @@
             </div>
         </section>
 
-        <c:url var="actionUrl" value="save/${selectedRegion.id}" />
-        <form:form id="destinationForm" commandName="destinationAdventureDTO" method="post"
-                   action="${actionUrl }" class="pure-form pure-form-aligned">
+        Destinations
+        <section>
+            <div class="dataList">
+                <table>
+                    <c:forEach var="destination" items="${destinations}">
+                        <tr>
+                            <td>${destination.destinationName}</td>
+                            <td>${destination.destinationDescription}</td>
+                            <td><a href="view/${destination.id}">view</a></td>
+                            </br>
+                            <td>
+                                <a href="../destination/adventure/add/${destination.id}">Add Adventure</a>
+                                <a href="../adventure/add/${destination.id}">Add Adventure</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+        </section>
 
+        <c:url var="actionUrl" value="save/${selectedRegion.id}" />
+        <form:form id="destinationForm" commandName="destination"  method="post"
+                   action="${actionUrl }" class="pure-form pure-form-aligned">
             <fieldset>
                 <legend></legend>
 

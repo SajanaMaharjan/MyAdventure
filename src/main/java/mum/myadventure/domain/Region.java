@@ -7,6 +7,7 @@ package mum.myadventure.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +28,7 @@ public class Region {
     private String regionName;
     private String regionDescription;
     
-    @OneToMany(mappedBy = "region")
+    @OneToMany(mappedBy = "region",cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private List<Destination> destinations = new ArrayList<>();
     
     public Region() {

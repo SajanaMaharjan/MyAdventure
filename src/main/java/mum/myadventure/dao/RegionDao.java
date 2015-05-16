@@ -51,9 +51,8 @@ public class RegionDao {
     }
 
     public Region update(Region region) {
-          Region retVal = (Region)sessionFactory.getCurrentSession().merge(region);
-        return retVal;
+          Region returnRegion = (Region)sessionFactory.getCurrentSession().merge(region);
+        return returnRegion;
     }
-    
     
 }

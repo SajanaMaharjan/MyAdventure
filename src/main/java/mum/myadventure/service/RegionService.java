@@ -10,6 +10,7 @@ import mum.myadventure.dao.RegionDao;
 import mum.myadventure.domain.Region;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -17,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author sajana
  */
 @Service
-@Transactional
+@Transactional(propagation = Propagation.REQUIRES_NEW)
 public class RegionService {
 
     @Autowired RegionDao regionDao;
@@ -35,6 +36,7 @@ public class RegionService {
     }
     
       public Region update(Region region){
+          region = getRegionById(region.getId());
         return regionDao.update(region);
     }
     

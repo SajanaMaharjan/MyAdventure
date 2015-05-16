@@ -28,13 +28,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/region")
 public class RegionController {
-
+    
     @Autowired
     private RegionService regionService;
     
     @Autowired
     private DestinationService destinationService;
-
+    
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
     public String listAllRegions(Model model, @ModelAttribute Region region) {
         model.addAttribute("regions", regionService.getAll());
@@ -53,25 +53,24 @@ public class RegionController {
 //        
 //        return "admin/addRegion";
 //    }
-    
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveRegion(@Valid Region region, BindingResult result) {
-
+        
         if (!result.hasErrors()) {
             regionService.addRegion(region);
 //            return "redirect:/region/listAll";
-              return "redirect:/region/listAll";
+            return "redirect:/region/listAll";
         }
-
+        
         return "redirect:/region/listAll";
     }
     
-    @RequestMapping(value = "/addDestination/{id}", method=RequestMethod.GET)
-    public String addDestination(@PathVariable long id, Model model,@ModelAttribute DestinationAdventureDTO dto) {
-
+    @RequestMapping(value = "/addDestination/{id}", method = RequestMethod.GET)
+    public String addDestination(@PathVariable long id, Model model, @ModelAttribute Destination destination) {
+        
         Region region = regionService.getRegionById(id);
         model.addAttribute("selectedRegion", region);
-        
+
 //        System.out.println("course name is: " + destination.getDestinationName());
 //        model.addAttribute("reviews", course.getReviews());
 //        model.addAttribute("review", new Review());
@@ -79,28 +78,30 @@ public class RegionController {
         
     }
     
-    @RequestMapping(value = "/addDestination/save/{id}", method=RequestMethod.POST)
-    public String saveDestination(@PathVariable long id, Model model,@Valid Destination destination, BindingResult result) {
+    @RequestMapping(value = "/addDestination/save/{id}", method = RequestMethod.POST)
+    public String saveDestination(@PathVariable long id, Model model, @Valid Destination destination, BindingResult result) {
+        System.out.println("Destin ::" + destination.getDestinationName() + "id__=" + id);
 
-        
-//        model.addAttribute("selectedRegion", region);
-        
-//        System.out.println("course name is: " + destination.getDestinationName());
-//        model.addAttribute("reviews", course.getReviews());
-//        model.addAttribute("review", new Review());
-//        return "admin/addDestination";
-        
         if (!result.hasErrors()) {
-//            Destination destination = destinationService.getDestinationById(id);
-            Region region = regionService.getRegionById(id);
-           
+            
+            Region region = regionService.getRegionById(id); 
+            
+//           destination id  alredy model ma set vayecha /addDestination/{id} ko @path variable bata so save 
+            destination.setId(0);
+            
+//            a possible soln
+//            Destination destinationOne = new Destination(destination.getDestinationName(), destination.getDestinationDescription());
+            
             destinationService.addDestination(destination);
-             region.addDestination(destination);
-             regionService.update(region);
-//            return ("redirect:/destination/view/" + String.valueOf(destination.getId()));
+            region.addDestination(destination);
+            regionService.update(region);
+            model.addAttribute("selectedRegion", region);
+            model.addAttribute("destination", destination);
+                        
+            return ("redirect:/destination/view/" + String.valueOf(destination.getId()));
         }
 //        return "adventure/listAll/{id}";
-         return "admin/addRegion";
+        return "/admin/addDestination";
     }
-
+    
 }
